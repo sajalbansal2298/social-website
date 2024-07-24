@@ -1,14 +1,5 @@
-<script setup lang="ts">
-import TheWelcome from '../../../components/TheWelcome.vue';
-import { cache } from '@/tools';
-import { api } from '@/api';
-
-api.doGetContent();
-cache.insert('TEST', true);
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <h1>Hii</h1>
 </template>

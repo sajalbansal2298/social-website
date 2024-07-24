@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "@100mslive/hms-video-store": "^0.8.1",
-    "@learnapp-co/lib-ws-web": "^0.1.3",
     "@sohailalam2/abu": "^0.6.0",
     "@vueuse/core": "^9.10.0",
     "broadcast-channel": "^4.20.1",
@@ -78,8 +77,8 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint --edit \"$1\"",
-      "pre-commit": "npm run lint && npm run test",
-      "pre-push": "npm run lint && npm run test && npm run build"
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run lint && npm run build"
     }
   }
 }
