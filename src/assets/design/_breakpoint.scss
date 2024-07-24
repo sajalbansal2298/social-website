@@ -1,0 +1,65 @@
+@use "sass:math";
+
+@function em($pixels) {
+  @return #{math.div($pixels, 16)}em;
+}
+
+@mixin breakpoint($point) {
+  @if $point == desktop {
+    @media (min-width: em(1439)) {
+      @content;
+    }
+  } @else if $point == laptop-x {
+    @media (min-width: em(1200)) {
+      @content;
+    }
+  } @else if $point == laptop {
+    @media (min-width: em(1024)) {
+      @content;
+    }
+  } @else if $point == tablet-x {
+    @media (min-width: em(996)) {
+      @content;
+    }
+  } @else if $point == tablet {
+    @media (min-width: em(768)) {
+      @content;
+    }
+  } @else if $point == phablet-x {
+    @media (min-width: em(575)) {
+      @content;
+    }
+  } @else if $point == phablet {
+    @media (min-width: em(480)) {
+      @content;
+    }
+  } @else if $point == mobile-x {
+    @media (min-width: em(375)) {
+      @content;
+    }
+  } @else if $point == mobile {
+    @media (min-width: em(320)) {
+      @content;
+    }
+  }
+}
+
+@mixin wideBreakpoint($point) {
+  @if $point == desktop {
+    @media (min-width: em(1440)) {
+      @content;
+    } // 1440
+  } @else if $point == widescreen {
+    @media (min-width: em(1600)) {
+      @content;
+    } // 1600
+  } @else if $point == widescreen-x {
+    @media (min-width: em(1920)) {
+      @content;
+    } // 1920
+  } @else if $point == laptop {
+    @media (min-width: em(1024)) {
+      @content;
+    }
+  }
+}

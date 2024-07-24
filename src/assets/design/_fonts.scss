@@ -1,0 +1,445 @@
+@use "sass:math";
+
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&display=swap");
+
+// For local fonts:
+// @font-face {
+//     font-family: 'MyMontserrat';
+//     src: url(~@/assets/design/montserrat.ttf) format('font-type');
+//     font-display: auto;
+//   }
+
+$system-default-font-family: "Manrope", sans-serif;
+$system-font-family-montserrat: "Montserrat", sans-serif;
+
+$heading-font-family: $system-default-font-family;
+$heading-font-family-montserrat: $system-font-family-montserrat;
+$content-font-family: $system-default-font-family;
+$content-font-family-montserrat: $system-font-family-montserrat;
+
+$thin-font-weight: 100;
+$x-light-font-weight: 200;
+$light-font-weight: 300;
+$normal-font-weight: 400;
+$medium-font-weight: 500;
+$semi-bold-font-weight: 600;
+$bold-font-weight: 700;
+$x-bold-font-weight: 800;
+$black-font-weight: 900;
+$x-black-font-weight: 950;
+
+$text-pie-x: 5.625rem; // 50px
+$text-biggie: 3.75rem; // 60px
+$text-pie: 3.125rem; // 50px
+$text-alpha-x: 2.813rem; // 45px
+$text-alpha: 2.5rem; // 40px
+$text-happa: 2.62rem; // 42px
+$text-theta: 2.25rem; // 36px
+$text-eta: 2rem; // 32px
+$text-beta: 1.875rem; //
+$text-silo: 1.75rem; // 28px
+$text-gamma: 1.625rem; // 26px
+$text-delta: 1.5rem; // 24px
+$text-epsilon: 1.375rem; // 22px
+$text-zeta: 1.25rem; // 20px
+$text-kappa: 1.125rem; // 18px
+$text-lambda: 1rem; // 16px
+$text-sigma: 0.875rem; // 14px
+$text-upsilon: 0.75rem; // 12px
+$text-omega: 0.625rem; // 10px
+$text-psi: 0.5rem; // 8px
+
+// psi, omega, upsilon, sigma, lambda, kappa, zeta, epsilon, delta, gamma, silo, beta, eta, theta, happa, alpha, alpha-x, pie, biggie, pie-x
+
+$min_width: 20rem;
+$max_width: 90rem;
+
+@function strip-unit($value) {
+  @return math.div($value, ($value * 0 + 1));
+}
+
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+  $u1: unit($min-vw);
+  $u2: unit($max-vw);
+  $u3: unit($min-font-size);
+  $u4: unit($max-font-size);
+
+  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+    font-size: $min-font-size;
+    line-height: $min-font-size;
+
+    @media screen and (min-width: $min-vw) {
+      font-size: calc(
+        #{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} *
+          ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
+      );
+      line-height: calc(
+        #{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} *
+          ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
+      );
+    }
+
+    @media screen and (min-width: $max-vw) {
+      font-size: $max-font-size;
+      line-height: $max-font-size;
+    }
+  }
+}
+
+@mixin montserratfont {
+  font-family: $system-font-family-montserrat;
+}
+
+%font-heading {
+  font-family: $heading-font-family;
+  font-weight: $bold-font-weight;
+  color: $color-text-02;
+  letter-spacing: 0.07rem;
+  font-display: auto;
+}
+%font-content {
+  font-family: $content-font-family;
+  font-weight: $normal-font-weight;
+  color: $color-text-01;
+  letter-spacing: 0.05rem;
+  font-display: auto;
+}
+
+%font-heading-montserrat {
+  font-family: $heading-font-family-montserrat;
+  font-weight: $bold-font-weight;
+  color: $color-text-02;
+  letter-spacing: 0.07rem;
+  font-display: auto;
+}
+
+%typography-psi {
+  // 8px
+  @extend %font-content;
+
+  font-size: $text-psi;
+  line-height: $text-zeta;
+}
+
+%typography-omega {
+  // 10px
+  @extend %font-content;
+
+  font-size: $text-omega;
+  line-height: $text-zeta;
+}
+
+%typography-upsilon-omega {
+  // 10-12
+  @include fluid-type($min_width, $max_width, $text-omega, $text-upsilon);
+
+  @extend %font-heading;
+}
+
+%typography-omega-upsilon {
+  // 10-12
+  @include fluid-type($min_width, $max_width, $text-omega, $text-upsilon);
+
+  @extend %font-heading;
+}
+%typography-omega-upsilon-montserrat {
+  // 10-12
+  @include fluid-type($min_width, $max_width, $text-omega, $text-upsilon);
+
+  @extend %font-heading-montserrat;
+}
+
+%typography-omega-lambda {
+  // 10-16
+  @include fluid-type($min_width, $max_width, $text-omega, $text-lambda);
+
+  @extend %font-heading;
+}
+
+%typography-omega-sigma {
+  // 10-14
+  @include fluid-type($min_width, $max_width, $text-omega, $text-sigma);
+
+  @extend %font-heading;
+}
+
+%typography-upsilon {
+  // 12px
+  @extend %font-content;
+
+  font-size: $text-upsilon;
+  line-height: $text-zeta;
+}
+
+%typography-upsilon-sigma {
+  // 12-14
+  @include fluid-type($min_width, $max_width, $text-upsilon, $text-sigma);
+
+  @extend %font-heading;
+}
+
+%typography-upsilon-lambda {
+  // 12-16
+  @include fluid-type($min_width, $max_width, $text-upsilon, $text-lambda);
+
+  @extend %font-content;
+}
+
+%typography-upsilon-kappa {
+  // 12-18
+  @include fluid-type($min_width, $max_width, $text-upsilon, $text-kappa);
+
+  @extend %font-heading;
+}
+
+%typography-upsilon-delta {
+  // 12-24
+  @include fluid-type($min_width, $max_width, $text-upsilon, $text-delta);
+
+  @extend %font-heading;
+}
+
+%typography-sigma {
+  // 14px
+  @extend %font-content;
+
+  font-size: $text-sigma;
+  line-height: $text-zeta;
+}
+
+%typography-sigma-lambda {
+  // 14-16
+  @include fluid-type($min_width, $max_width, $text-sigma, $text-lambda);
+
+  @extend %font-heading;
+}
+
+%typography-sigma-kappa {
+  // 14-18
+  @include fluid-type($min_width, $max_width, $text-sigma, $text-kappa);
+
+  @extend %font-heading;
+}
+
+%typography-sigma-zeta {
+  // 14-20
+  @include fluid-type($min_width, $max_width, $text-sigma, $text-zeta);
+
+  @extend %font-heading;
+}
+
+%typography-sigma-delta {
+  // 14-24
+  @include fluid-type($min_width, $max_width, $text-sigma, $text-delta);
+
+  @extend %font-heading;
+}
+
+%typography-sigma-beta {
+  // 14-30px
+  @include fluid-type($min_width, $max_width, $text-sigma, $text-beta);
+
+  @extend %font-heading;
+}
+
+%typography-lambda {
+  // 16px(default)
+  @extend %font-content;
+
+  font-size: $text-lambda;
+  line-height: $text-zeta;
+}
+
+%typography-lambda-kappa {
+  // 16-18px
+  @include fluid-type($min_width, $max_width, $text-lambda, $text-kappa);
+
+  @extend %font-heading;
+}
+
+%typography-lambda-zeta {
+  // 16-20px
+  @include fluid-type($min_width, $max_width, $text-lambda, $text-zeta);
+
+  @extend %font-heading;
+}
+
+%typography-lambda-epsilon {
+  // 16-22px
+  @include fluid-type($min_width, $max_width, $text-lambda, $text-epsilon);
+
+  @extend %font-heading;
+}
+
+%typography-lambda-delta {
+  // 16-24px
+  @include fluid-type($min_width, $max_width, $text-lambda, $text-delta);
+
+  @extend %font-heading;
+}
+
+%typography-lambda-beta {
+  // 16-30px
+  @include fluid-type($min_width, $max_width, $text-lambda, $text-beta);
+
+  @extend %font-heading;
+}
+
+%typography-kappa {
+  // 18px
+  @extend %font-heading;
+
+  font-size: $text-kappa;
+  line-height: $text-zeta;
+}
+
+%typography-kappa-zeta {
+  // 18-20px
+  @include fluid-type($min_width, $max_width, $text-kappa, $text-zeta);
+
+  @extend %font-heading;
+}
+
+%typography-kappa-epsilon {
+  // 18-22px
+  @include fluid-type($min_width, $max_width, $text-kappa, $text-epsilon);
+
+  @extend %font-heading;
+}
+
+%typography-kappa-delta {
+  // 18-24px
+  @include fluid-type($min_width, $max_width, $text-kappa, $text-delta);
+
+  @extend %font-heading;
+}
+
+%typography-kappa-gamma {
+  // 18-26px
+  @include fluid-type($min_width, $max_width, $text-kappa, $text-gamma);
+
+  @extend %font-heading;
+}
+
+%typography-kappa-theta {
+  // 18-36px
+  @include fluid-type($min_width, $max_width, $text-kappa, $text-theta);
+
+  @extend %font-heading;
+}
+
+%typography-kappa-beta {
+  // 18-30px
+  @include fluid-type($min_width, $max_width, $text-kappa, $text-beta);
+
+  @extend %font-heading;
+}
+
+%typography-kappa-eta {
+  // 18-32px
+  @include fluid-type($min_width, $max_width, $text-kappa, $text-eta);
+
+  @extend %font-heading;
+}
+
+%typography-kappa-alpha {
+  // 18-40px
+  @include fluid-type($min_width, $max_width, $text-kappa, $text-alpha);
+
+  @extend %font-heading;
+}
+
+%typography-zeta {
+  // 20px
+  @extend %font-heading;
+
+  font-size: $text-zeta;
+  line-height: $text-zeta;
+}
+
+%typography-zeta-beta {
+  // 20-30px
+  @include fluid-type($min_width, $max_width, $text-zeta, $text-beta);
+
+  @extend %font-heading;
+}
+
+%typography-zeta-alpha {
+  // 20-40px
+  @include fluid-type($min_width, $max_width, $text-zeta, $text-alpha);
+
+  @extend %font-heading;
+}
+
+%typography-delta {
+  // 24px
+  @extend %font-heading;
+
+  font-size: $text-delta;
+  line-height: $text-zeta;
+}
+
+%typography-delta-beta {
+  // 24-30px
+  @include fluid-type($min_width, $max_width, $text-delta, $text-beta);
+
+  @extend %font-heading;
+}
+
+%typography-delta-eta {
+  // 24-32px
+  @include fluid-type($min_width, $max_width, $text-delta, $text-eta);
+
+  @extend %font-heading;
+}
+
+%typography-delta-kappa {
+  // 24-20px
+  @include fluid-type($min_width, $max_width, $text-kappa, $text-delta);
+
+  @extend %font-heading;
+}
+
+%typography-delta-alpha {
+  // 24-40px
+  @include fluid-type($min_width, $max_width, $text-delta, $text-alpha);
+
+  @extend %font-heading;
+}
+
+%typography-delta-happa {
+  // 24-42px
+  @include fluid-type($min_width, $max_width, $text-delta, $text-happa);
+
+  @extend %font-heading;
+}
+
+%typography-silo-eta {
+  // 28-32px
+  @include fluid-type($min_width, $max_width, $text-silo, $text-eta);
+
+  @extend %font-heading;
+}
+
+%typography-beta-alpha {
+  // 30-40px
+  @include fluid-type($min_width, $max_width, $text-beta, $text-alpha);
+
+  @extend %font-heading;
+}
+
+%typography-beta-pie {
+  // 30-50px
+  @include fluid-type($min_width, $max_width, $text-beta, $text-pie);
+
+  @extend %font-heading;
+}
+
+%typography-pie-x {
+  // 50px
+  @extend %font-content;
+
+  font-size: $text-pie-x;
+  line-height: $text-zeta;
+}

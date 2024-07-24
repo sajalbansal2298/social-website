@@ -1,0 +1,109 @@
+/* stylelint-disable */
+@import './design';
+@import 'https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+  position: relative;
+}
+
+html,
+body {
+  @extend %typography-lambda;
+
+  font-family: Manrope, sans-serif;
+  text-rendering: optimizelegibility;
+  color: #fff;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: black;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @extend %font-heading;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+  }
+
+  button {
+    outline: none;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+.noScroll {
+  overflow: hidden;
+}
+
+// old css
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-weight: normal;
+  display: flex;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsl(160deg 100% 37% / 100%);
+  transition: 0.4s;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsl(160deg 100% 37% / 20%);
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    place-items: center;
+  }
+
+  #app {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 2rem;
+  }
+}
+
+button {
+  border: 1px solid $color-support-39;
+  background: none;
+  color: $color-support-39;
+  padding: 5px 10px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: $color-support-39;
+  color: white;
+}
+
+button:disabled {
+  background: none;
+  color: gray;
+  cursor: not-allowed;
+  border-color: gray;
+}
